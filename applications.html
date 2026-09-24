@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Applications</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+ margin:0;
+ background:#f4f6f9;
+ color:#172033;
+}
+
+.header{
+ background:#12345b;
+ color:white;
+ padding:16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.header button{
+ border:0;
+ padding:9px 14px;
+ border-radius:8px;
+}
+
+.container{
+ max-width:1100px;
+ margin:auto;
+ padding:20px;
+}
+
+.application{
+ background:white;
+ margin:15px 0;
+ padding:18px;
+ border-radius:15px;
+ box-shadow:0 4px 15px #00000012;
+}
+
+.application h3{
+ margin-top:0;
+ color:#12345b;
+}
+
+.status{
+ display:inline-block;
+ padding:6px 10px;
+ border-radius:7px;
+ background:#fff3cd;
+ color:#856404;
+ font-size:13px;
+}
+
+button{
+ padding:10px 14px;
+ border:0;
+ border-radius:8px;
+ margin:5px 3px 0 0;
+ cursor:pointer;
+}
+
+.view{background:#e8eef7}
+.approve{background:#198754;color:white}
+.reject{background:#dc3545;color:white}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+ <strong>YUVA BHIM SENA GUJARAT</strong>
+ <button onclick="goBack()">Dashboard</button>
+</div>
+
+<div class="container">
+
+<h1>⏳ Member Applications</h1>
+
+<p>નવી સભ્ય અરજીઓ અહીં દેખાશે.</p>
+
+<div id="applications"></div>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("adminLogin") !== "true"){
+ window.location.href="index.html";
+}
+
+let applications = JSON.parse(
+ localStorage.getItem("applications") || "[]"
+);
+
+function displayApplications(){
+
+ const box=document.getElementById("applications");
+
+ if(applications.length===0){
+
+   box.innerHTML=`
+   <div class="application">
+   <h3>હાલમાં કોઈ નવી Application નથી.</h3>
+   <p>Google Form / Registration system જોડ્યા પછી applications અહીં દેખાશે.</p>
+   </div>`;
+
+   return;
+ }
+
+ box.innerHTML="";
+
+ applications.forEach((app,index)=>{
+
+   box.innerHTML += `
+   <div class="application">
+
+   <h3>${app.name || "Member"}</h3>
+
+   <p><b>Mobile:</b> ${app.mobile || "-"}</p>
+
+   <p><b>District:</b> ${app.district || "-"}</p>
+
+   <p><b>Taluka:</b> ${app.taluka || "-"}</p>
+
+   <p>
+   <b>Status:</b>
+   <span class="status">${app.status || "Pending"}</span>
+   </p>
+
+   <button class="view"
+   onclick="viewApplication(${index})">
+   👁️ View
+   </button>
+
+   <button class="approve"
+   onclick="approveApplication(${index})">
+   ✅ Approve
+   </button>
+
+   <button class="reject"
+   onclick="rejectApplication(${index})">
+   ❌ Reject
+   </button>
+
+   </div>
+   `;
+ });
+}
+
+function viewApplication(index){
+
+ const a=applications[index];
+
+ alert(
+ `Name: ${a.name || "-"}
+Mobile: ${a.mobile || "-"}
+District: ${a.district || "-"}
+Taluka: ${a.taluka || "-"}
+Status: ${a.status || "Pending"}`
+ );
+}
+
+function approveApplication(index){
+
+ applications[index].status="Approved";
+
+ localStorage.setItem(
+   "applications",
+   JSON.stringify(applications)
+ );
+
+ displayApplications();
+
+ alert("Application Approved ✅");
+}
+
+function rejectApplication(index){
+
+ applications[index].status="Rejected";
+
+ localStorage.setItem(
+   "applications",
+   JSON.stringify(applications)
+ );
+
+ displayApplications();
+
+ alert("Application Rejected ❌");
+}
+
+function goBack(){
+
+ window.location.href="dashboard.html";
+
+}
+
+displayApplications();
+
+</script>
+
+</body>
+</html>
