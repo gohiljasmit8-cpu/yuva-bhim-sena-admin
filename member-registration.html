@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Registration</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+ margin:0;
+ background:#f4f6f9;
+}
+
+.header{
+ background:#12345b;
+ color:white;
+ padding:16px;
+ font-size:18px;
+ font-weight:bold;
+}
+
+.container{
+ max-width:650px;
+ margin:25px auto;
+ padding:20px;
+}
+
+.form-box{
+ background:white;
+ padding:25px;
+ border-radius:18px;
+ box-shadow:0 5px 20px #0001;
+}
+
+h1{
+ color:#12345b;
+}
+
+label{
+ display:block;
+ margin-top:16px;
+ font-weight:bold;
+}
+
+input,select{
+ width:100%;
+ padding:13px;
+ margin-top:7px;
+ border:1px solid #ccd5df;
+ border-radius:10px;
+ font-size:16px;
+}
+
+button{
+ width:100%;
+ margin-top:22px;
+ padding:14px;
+ border:0;
+ border-radius:10px;
+ background:#12345b;
+ color:white;
+ font-size:17px;
+ font-weight:bold;
+}
+
+.preview{
+ margin-top:15px;
+ text-align:center;
+}
+
+.preview img{
+ width:120px;
+ height:150px;
+ object-fit:cover;
+ border-radius:10px;
+ border:2px solid #12345b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+YUVA BHIM SENA GUJARAT
+</div>
+
+<div class="container">
+
+<div class="form-box">
+
+<h1>📝 Member Registration</h1>
+
+<p>સભ્ય બનવા માટે નીચેની માહિતી ભરો.</p>
+
+<form id="memberForm">
+
+<label>પૂરું નામ</label>
+<input type="text" id="name" required>
+
+<label>મોબાઇલ નંબર</label>
+<input type="tel" id="mobile" required>
+
+<label>ઈમેલ</label>
+<input type="email" id="email">
+
+<label>રાજ્ય</label>
+<input type="text" id="state" value="Gujarat" required>
+
+<label>જિલ્લો</label>
+<input type="text" id="district" required>
+
+<label>તાલુકો</label>
+<input type="text" id="taluka" required>
+
+<label>ગામ / શહેર</label>
+<input type="text" id="city">
+
+<label>જન્મ તારીખ</label>
+<input type="date" id="dob">
+
+<label>📸 Passport Size Photo</label>
+<input type="file" id="photo" accept="image/*" required>
+
+<div class="preview">
+<img id="preview" style="display:none;">
+</div>
+
+<button type="submit">
+Submit Application
+</button>
+
+</form>
+
+</div>
+</div>
+
+<script>
+
+const photoInput=document.getElementById("photo");
+
+photoInput.addEventListener("change",function(){
+
+ const file=this.files[0];
+
+ if(file){
+
+   const reader=new FileReader();
+
+   reader.onload=function(e){
+
+     const img=document.getElementById("preview");
+
+     img.src=e.target.result;
+     img.style.display="block";
+
+   }
+
+   reader.readAsDataURL(file);
+ }
+});
+
+
+document.getElementById("memberForm").addEventListener("submit",function(e){
+
+ e.preventDefault();
+
+ const application={
+   id:Date.now(),
+   name:document.getElementById("name").value,
+   mobile:document.getElementById("mobile").value,
+   email:document.getElementById("email").value,
+   state:document.getElementById("state").value,
+   district:document.getElementById("district").value,
+   taluka:document.getElementById("taluka").value,
+   city:document.getElementById("city").value,
+   dob:document.getElementById("dob").value,
+   status:"Pending"
+ };
+
+ let applications=JSON.parse(
+   localStorage.getItem("applications") || "[]"
+ );
+
+ applications.push(application);
+
+ localStorage.setItem(
+   "applications",
+   JSON.stringify(applications)
+ );
+
+ alert("Application Successfully Submitted ✅");
+
+ this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
