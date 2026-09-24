@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YBSG Admin Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f1f5f9;
+    }
+
+    .login-box {
+      width: 92%;
+      max-width: 400px;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      color: #12345b;
+      font-size: 24px;
+    }
+
+    p {
+      text-align: center;
+      color: #666;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin-top: 7px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 22px;
+      border: none;
+      border-radius: 10px;
+      background: #12345b;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    #message {
+      text-align: center;
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+
+    <h1>YUVA BHIM SENA GUJARAT</h1>
+    <p>Admin Panel Login</p>
+
+    <form onsubmit="login(event)">
+
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Username" required>
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <button type="submit">Login</button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </div>
+
+<script>
+
+function login(event) {
+
+  event.preventDefault();
+
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  if (username === "admin" && password === "admin123") {
+
+    localStorage.setItem("adminLogin", "true");
+
+    alert("Login Successful!");
+
+    window.location.href = "dashboard.html";
+
+  } else {
+
+    document.getElementById("message").innerText =
+      "Username અથવા Password ખોટો છે.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
