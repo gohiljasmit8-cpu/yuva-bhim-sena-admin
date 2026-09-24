@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YBSG Admin Dashboard</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  margin:0;
+  background:#f4f6f9;
+  color:#172033;
+}
+
+/* HEADER */
+
+.header{
+  background:#12345b;
+  color:white;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header h2{
+  margin:0;
+  font-size:19px;
+}
+
+.logout{
+  background:white;
+  color:#12345b;
+  border:0;
+  padding:9px 14px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+/* CONTAINER */
+
+.container{
+  padding:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.welcome{
+  margin-bottom:20px;
+}
+
+.welcome h1{
+  margin-bottom:5px;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.card .icon{
+  font-size:28px;
+}
+
+.card h3{
+  margin:10px 0 5px;
+}
+
+.number{
+  font-size:30px;
+  font-weight:bold;
+  color:#12345b;
+}
+
+/* MENU */
+
+.menu{
+  margin-top:25px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+}
+
+.menu h2{
+  margin-top:0;
+}
+
+.menu button{
+  width:100%;
+  padding:14px;
+  margin:6px 0;
+  border:1px solid #ddd;
+  background:#f8fafc;
+  border-radius:10px;
+  text-align:left;
+  font-size:16px;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+.cards{
+  grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h2>YUVA BHIM SENA GUJARAT</h2>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div class="container">
+
+<div class="welcome">
+
+<h1>📊 Admin Dashboard</h1>
+
+<p>સ્વાગત છે, Administrator 👋</p>
+
+</div>
+
+
+<!-- STATISTICS -->
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">👥</div>
+<h3>Total Members</h3>
+<div class="number">0</div>
+</div>
+
+
+<div class="card">
+<div class="icon">⏳</div>
+<h3>Pending Applications</h3>
+<div class="number">0</div>
+</div>
+
+
+<div class="card">
+<div class="icon">🪪</div>
+<h3>ID Cards</h3>
+<div class="number">0</div>
+</div>
+
+
+<div class="card">
+<div class="icon">📄</div>
+<h3>Appointment Letters</h3>
+<div class="number">0</div>
+</div>
+
+
+<div class="card">
+<div class="icon">📰</div>
+<h3>News</h3>
+<div class="number">0</div>
+</div>
+
+
+<div class="card">
+<div class="icon">📸</div>
+<h3>Gallery</h3>
+<div class="number">0</div>
+</div>
+
+</div>
+
+
+<!-- ADMIN MENU -->
+
+<div class="menu">
+
+<h2>⚙️ Management</h2>
+
+<button>👥 Member Management</button>
+
+<button>⏳ Applications</button>
+
+<button>🏛️ Coordinator Management</button>
+
+<button>🪪 ID Card Generator</button>
+
+<button>📄 Appointment Letter</button>
+
+<button>📰 News Management</button>
+
+<button>📸 Gallery Management</button>
+
+<button>▶️ YouTube Videos</button>
+
+<button>📢 Notifications</button>
+
+<button>🌐 Website Settings</button>
+
+<button>⚙️ Admin Settings</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+if(localStorage.getItem("adminLogin") !== "true"){
+  window.location.href="index.html";
+}
+
+function logout(){
+
+  localStorage.removeItem("adminLogin");
+
+  window.location.href="index.html";
+
+}
+
+</script>
+
+</body>
+</html>
